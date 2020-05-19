@@ -1,0 +1,27 @@
+<h3>Update Book</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form name="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Category</label>
+      <input type="text" class="form-control" id="category" required [(ngModel)]="book.category" name="category">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Title</label>
+      <input type="text" class="form-control" id="title" required [(ngModel)]="book.title" name="title">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Price</label>
+      <input type="text" class="form-control" id="price" required [(ngModel)]="book.price" name="price">    
+    </div>
+
+    <div class="form-group">
+      <label for="name">Year</label>
+      <input type="text" class="form-control" id="year" required [(ngModel)]="book.year" name="year">    
+    </div>
+
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Submit</button>
+    <button (click)="list()" class="btn btn-primary" style="margin-left: 10px">Back to Book List</button><br>
+  </form>
+</div>

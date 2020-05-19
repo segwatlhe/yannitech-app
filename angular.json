@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "yannitech"
+    }
+  },
+  "defaultProject": "yannitech",
+  "cli": {
+    "analytics": "9c859bd5-5091-4b80-aee8-e6997d53527c"
+  }
 }
