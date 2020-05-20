@@ -1,11 +1,11 @@
     <h3>Add Author</h3>
 <div [hidden]="submitted" style="width: 400px;">
   <form #addAuthor = "ngForm" (ngSubmit) = "onSubmit(addAuthor.value)">
-     <div class="form-group">
+ <!--    <div class="form-group">
       <label for="name">Category</label>
       <input type="text" class="form-control" id="category" disabled="true" required [(ngModel)]="book.category" name="category">
     </div>
-<!--
+
     <div class="form-group">
       <label for="name">Title</label>
       <input type="text" class="form-control" id="title" disabled="true" required [(ngModel)]="book.title" name="title">
@@ -56,9 +56,9 @@
           <td>{{book.initial}}</td>
           <td>{{book.surname}}</td>
           <td>
-             <button (click)="deleteAuthor(book.id)" class="btn btn-danger" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Remove Author</button>
-        <!--    <button (click)="updateBook(book.id)" class="btn btn-warning" style="margin-left: 10px">Update Book</button>
-            <button (click)="addAuthor(book.id)" class="btn btn-success" style="margin-left: 10px">Add Author</button>
+             <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-xs" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Remove Author</button>
+            <button (click)="updateAuthor(book.id)" class="btn btn-warning btn-xs" style="margin-left: 10px">Update Author</button>
+        <!--    <button (click)="addAuthor(book.id)" class="btn btn-success" style="margin-left: 10px">Add Author</button>
             <button (click)="bookDetails(book.id)" class="btn btn-info" style="margin-left: 10px">Details</button> -->
           </td>
         </tr>

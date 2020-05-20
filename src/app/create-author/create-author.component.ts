@@ -110,4 +110,13 @@ export class CreateAuthorComponent implements OnInit {
         this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")
   }
 
+  updateAuthor(id: number) {
+    console.log('test ' + id)
+    // this.bookService.updateBook(this.id, this.book)
+    //   .subscribe(data => console.log(data), error => console.log(error));
+    // this.book = new Book();
+    // this.gotoList();
+    // this.notifyService.showSuccess("Book update successful.", "Yannitech BookStore")
+  }
+
 }
