@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CreateAuthorComponent } from './create-author/create-author.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ToastrModule } from 'ngx-toastr';
     CreateBookComponent,
     BookDetailsComponent,
     BookListComponent,
-    UpdateBookComponent
+    UpdateBookComponent,
+    CreateAuthorComponent
   ],
   imports: [
     BrowserModule,

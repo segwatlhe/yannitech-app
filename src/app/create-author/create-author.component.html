@@ -1,0 +1,69 @@
+    <h3>Add Author</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form #addAuthor = "ngForm" (ngSubmit) = "onSubmit(addAuthor.value)">
+     <div class="form-group">
+      <label for="name">Category</label>
+      <input type="text" class="form-control" id="category" disabled="true" required [(ngModel)]="book.category" name="category">
+    </div>
+<!--
+    <div class="form-group">
+      <label for="name">Title</label>
+      <input type="text" class="form-control" id="title" disabled="true" required [(ngModel)]="book.title" name="title">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Price</label>
+      <input type="text" class="form-control" id="price" disabled="true" required [(ngModel)]="book.price" name="price">    
+    </div> 
+
+    <div class="form-group">
+      <label for="name">Year</label>
+      <input type="text" class="form-control" id="year" disabled="true" required [(ngModel)]="book.year" name="year">    
+    </div>
+    -->
+
+    <div class="w-100"></div>
+    <div class="form-group">
+      <label for="name">Author Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="book.name" name="name">    
+    </div>
+    <div class="form-group">
+      <label for="name">Author Initials</label>
+      <input type="text" class="form-control" id="initial"  required [(ngModel)]="book.initial" name="initial">    
+    </div>
+    <div class="form-group">
+      <label for="name">Author Surname</label>
+      <input type="text" class="form-control" id="surname" required [(ngModel)]="book.surname" name="surname">    
+    </div>
+
+    <button type="submit" class="btn btn-success" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Submit</button>
+    <button (click)="list()" class="btn btn-primary" style="margin-left: 10px">Back to Book List</button><br>
+  </form>
+
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Author Name</th>
+          <th>Author Initials</th>
+          <th>Author Surname</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books | async">
+          <td>{{book.name}}</td>
+          <td>{{book.initial}}</td>
+          <td>{{book.surname}}</td>
+          <td>
+             <button (click)="deleteAuthor(book.id)" class="btn btn-danger" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Remove Author</button>
+        <!--    <button (click)="updateBook(book.id)" class="btn btn-warning" style="margin-left: 10px">Update Book</button>
+            <button (click)="addAuthor(book.id)" class="btn btn-success" style="margin-left: 10px">Add Author</button>
+            <button (click)="bookDetails(book.id)" class="btn btn-info" style="margin-left: 10px">Details</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -4,4 +4,9 @@ export class Book {
     year: string;
     price: number;
     category: string;
+  //  name: string;
+
+    name: string;
+    initial: string;
+    surname: string;
 }
