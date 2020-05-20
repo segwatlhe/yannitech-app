@@ -1,20 +1,21 @@
-<div class="panel panel-primary">
+<body>
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h2>Book List</h2>
     </div>
     <div class="panel-body">
       <table class="table table-striped">
-        <thead>
+        <thead class="thead-dark">
           <tr>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Price</th>
-            <th>Actions</th>
+            <th scope="col">Category</th>
+            <th scope="col">Title</th>
+            <th scope="col">Year</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let book of books | async">
+          <tr class="table-primary" *ngFor="let book of books | async">
             <td>{{book.category}}</td>
             <td>{{book.title}}</td>
             <td>{{book.year}}</td>
@@ -30,3 +31,4 @@
       </table>
     </div>
   </div>
+</body>
