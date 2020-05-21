@@ -2,26 +2,35 @@
 <div [hidden]="submitted" style="width: 400px;">
   <form name="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="name">Category</label>
-      <input type="text" class="form-control" id="category" required [(ngModel)]="book.category" name="category">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Category</span>
+      </div>
+      <input type="text" required placeholder="Category" autocomplete="off" class="form-control" id="category" required [(ngModel)]="book.category" name="category">
     </div>
 
-    <div class="form-group">
-      <label for="name">Title</label>
-      <input type="text" class="form-control" id="title" required [(ngModel)]="book.title" name="title">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Title</span>
+      </div>
+      <input type="text" required placeholder="Title" autocomplete="off" class="form-control" id="title" required [(ngModel)]="book.title" name="title">
     </div>
 
-    <div class="form-group">
-      <label for="name">Price</label>
-      <input type="text" class="form-control" id="price" required [(ngModel)]="book.price" name="price">    
-    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Year</span>
+      </div>
+      <input type="text" required placeholder="Year" autocomplete="off" class="form-control" id="year" required [(ngModel)]="book.year" name="year">
+    </div> 
 
-    <div class="form-group">
-      <label for="name">Year</label>
-      <input type="text" class="form-control" id="year" required [(ngModel)]="book.year" name="year">    
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Price</span>
+      </div>
+      <input type="number" required="true" placeholder="Price" autocomplete="off" class="form-control" id="price" required [(ngModel)]="book.price" name="price">
+    </div> 
     </div>
-
-    <button type="submit" class="btn btn-success" style="margin-left: 10px">Submit</button>
-    <button (click)="list()" class="btn btn-primary" style="margin-left: 10px">Back to Book List</button><br>
+    <button type="submit" class="btn btn-primary" style="margin-left: 10px">Submit</button>
+    <button (click)="list()" class="btn btn-warning" style="margin-left: 10px">Back</button><br>
   </form>
 </div>

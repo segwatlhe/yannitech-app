@@ -1,0 +1,16 @@
+// .body {
+//     padding-top: 50px;
+//     padding-bottom: 10px;
+//     background-color: rgb(240, 68, 231);
+//   }
+
+  :host {
+    border: 2px solid dimgray;
+    display: block;
+    padding: 20px;
+    background-color: #efefef;
+}
+
+.bg-primary {
+  background-color: #758da7!important;
+}
