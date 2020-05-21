@@ -6,7 +6,7 @@ export class Book {
     category: string;
   //  name: string;
 
-    name: string;
+    author: string;
     initial: string;
     surname: string;
 }

@@ -22,48 +22,49 @@
     </div>
     -->
 
-    <div class="w-100"></div>
     <div class="form-group">
-      <label for="name">Author Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="book.name" name="name">    
+      <label for="name">Author</label>
+      <input type="text" placeholder="Name Initial. Surname" autocomplete="off" class="form-control" id="author" required [(ngModel)]="book.author" name="author">    
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="name">Author Initials</label>
-      <input type="text" class="form-control" id="initial"  required [(ngModel)]="book.initial" name="initial">    
+      <input type="text" placeholder="Author Initials" autocomplete="off" class="form-control" id="initial"  required [(ngModel)]="book.initial" name="initial">    
     </div>
     <div class="form-group">
       <label for="name">Author Surname</label>
-      <input type="text" class="form-control" id="surname" required [(ngModel)]="book.surname" name="surname">    
-    </div>
+      <input type="text" placeholder="Author Surname" autocomplete="off" class="form-control" id="surname" required [(ngModel)]="book.surname" name="surname">    
+    </div> -->
 
     <button type="submit" class="btn btn-success" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Submit</button>
     <button (click)="list()" class="btn btn-primary" style="margin-left: 10px">Back to Book List</button><br>
   </form>
 
+</div>
+<br/>
+<div class="panel panel-primary">
   <div class="panel-body">
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Author Name</th>
-          <th scope="col">Author Initials</th>
-          <th scope="col">Author Surname</th>
-          <th scope="col">Actions</th>
+          <th scope="w-25">Author</th>
+          <!-- <th scope="col">Author Initials</th>
+          <th scope="col">Author Surname</th> -->
+          <th scope="w-25">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of books | async">
-          <td>{{book.name}}</td>
-          <td>{{book.initial}}</td>
-          <td>{{book.surname}}</td>
+        <tr class="table-primary"  *ngFor="let book of books | async">
+          <td>{{book.author}}</td>
+          <!-- <td>{{book.initial}}</td>
+          <td>{{book.surname}}</td> -->
           <td>
-             <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-xs" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Remove Author</button>
-            <button (click)="updateAuthor(book.id)" class="btn btn-warning btn-xs" style="margin-left: 10px">Update Author</button>
-        <!--    <button (click)="addAuthor(book.id)" class="btn btn-success" style="margin-left: 10px">Add Author</button>
+             <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-sm" style="margin-left: 10px"><a onClick="window.location.reload()"></a>Remove Author</button>
+         <!--   <button (click)="updateAuthor(book.id)" class="btn btn-warning btn-sm" style="margin-left: 10px">Update Author</button>
+            <button (click)="addAuthor(book.id)" class="btn btn-success" style="margin-left: 10px">Add Author</button>
             <button (click)="bookDetails(book.id)" class="btn btn-info" style="margin-left: 10px">Details</button> -->
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-
 </div>
