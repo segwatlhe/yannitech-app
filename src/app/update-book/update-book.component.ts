@@ -3,6 +3,7 @@ import { Book } from '../model/book';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../book.service';
 import { NotificationService } from '../service/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-book',
@@ -13,6 +14,7 @@ export class UpdateBookComponent implements OnInit {
 
   public submitted: boolean = false;
 
+  books: Observable<Book[]>;
   id: number;
   book: Book;
 
@@ -33,9 +35,17 @@ export class UpdateBookComponent implements OnInit {
       }, error => console.log(error));
   }
 
+  reloadData() {
+    this.books = this.bookService.getBookList();
+  }
+
   updateBook() {
     this.bookService.updateBook(this.id, this.book)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => {
+        console.log(data);
+        this.reloadData();
+      }
+        , error => console.log(error));
     this.book = new Book();
     this.gotoList();
     this.notifyService.showSuccess("Book update successful.", "Yannitech BookStore")

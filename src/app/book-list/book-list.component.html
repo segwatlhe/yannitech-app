@@ -5,11 +5,13 @@
     </div>
     <div class="panel-body">
 
+      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
       <div class="input-group">
-        <input type="text" autocomplete="off" class="form-control" 
+        <input type="text" autocomplete="off" class="form-control" [(ngModel)]="book.title" name="title"
         name="search" placeholder="Search for a book..." aria-describedby="basic-addon1">
         <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
       </div>
+    </form>
 
       <table class="table table-striped">
         <thead class="thead-dark">

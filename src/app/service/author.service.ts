@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthorService {
 
-  private baseUrl = 'http://localhost:8080/yannitech/api/v2/book';
+  private baseUrl = 'http://localhost:8080/yannitech/api/book';
   
   constructor(private http: HttpClient) { }
 

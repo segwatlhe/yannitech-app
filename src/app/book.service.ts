@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class BookService {
 
   private baseUrl = 'http://localhost:8080/yannitech/api/books';
+  private findBookUrl = 'http://localhost:8080/yannitech/api/findbook?title=';
+
 
   constructor(private http: HttpClient) { }
 
@@ -31,4 +33,7 @@ export class BookService {
     return this.http.get(`${this.baseUrl}`);
   }
   
+  findBook(value: any): Observable<any> {
+    return this.http.get(`${this.findBookUrl}${value}`);
+  }
 }

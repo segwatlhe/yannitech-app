@@ -12,6 +12,9 @@ import { NotificationService } from '../service/notification.service';
 })
 export class BookListComponent implements OnInit {
 
+  // find book
+  book: Book = new Book();
+
   books: Observable<Book[]>;
 
   constructor(private notifyService : NotificationService, 
@@ -47,5 +50,12 @@ export class BookListComponent implements OnInit {
 
   addAuthor(id: number){
     this.router.navigate(['addAuthor', id]);
+  }
+
+  onSubmit(form){
+    //console.log(title);
+    this.bookService.findBook(this.book.title).subscribe(data => console.log('1 '+data), error => console.log('2 ' +error));
+    this.book = new Book();
+    this.notifyService.showInfo("Book found", "Yannitech BookStore")
   }
 }

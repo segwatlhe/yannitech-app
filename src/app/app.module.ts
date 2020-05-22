@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateAuthorComponent } from './create-author/create-author.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookFindComponent } from './book-find/book-find.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BookDetailsComponent,
     BookListComponent,
     UpdateBookComponent,
-    CreateAuthorComponent
+    CreateAuthorComponent,
+    BookFindComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Book } from '../model/book';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../service/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-book',
@@ -12,6 +13,7 @@ import { NotificationService } from '../service/notification.service';
 export class CreateBookComponent implements OnInit {
 
   book: Book = new Book();
+  books: Observable<Book[]>;
   submitted = false;
 
   constructor(private notifyService : NotificationService, 
@@ -26,9 +28,17 @@ export class CreateBookComponent implements OnInit {
     this.book = new Book();
   }
 
+  reloadData() {
+    this.books = this.bookService.getBookList();
+  }
+
   save() {
     this.bookService.createBook(this.book)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => {
+        console.log(data);
+        this.reloadData();
+      }
+        , error => console.log(error));
     this.book = new Book();
     this.gotoList();
     this.notifyService.showSuccess("Book save successful", "Yannitech BookStore")
