@@ -4,7 +4,6 @@ import { NotificationService } from '../service/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../book.service';
 import { AuthorService } from '../service/author.service';
-//import { Author } from '../model/author';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,11 +31,11 @@ export class CreateAuthorComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
     
-    this.bookService.getBook(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.book = data;
-      }, error => console.log(error));
+    this.bookService.getBook(this.id).subscribe(
+      data =>  {console.log('Observer got a next value: ' + data), this.book = data;},
+      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book not retrieved.", "Yannitech BookStore")},
+      () =>    {console.log('Observer got a complete notification');}
+      );
 
       this.books = this.authorService.getAuthorList(this.id);
   }
@@ -46,13 +45,11 @@ export class CreateAuthorComponent implements OnInit {
   }
 
   addAuthor() {
-    this.authorService.createAuthor(this.book)
-      .subscribe(data => {
-        console.log(data);
-        this.reloadData();
-       }, error => console.log(error));
-    this.book = new Book();
-    this.notifyService.showSuccess("Author added successfully.", "Yannitech BookStore")
+    this.authorService.createAuthor(this.book).subscribe(
+      data =>  {console.log('Observer got a next value: ' + data), this.reloadData();},
+      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Author not added.", "Yannitech BookStore")},
+      () => {console.log('Observer got a complete notification'), this.notifyService.showSuccess("Author added successfully.", "Yannitech BookStore");}
+    );
   }
 
   onSubmit(data) {
@@ -60,10 +57,12 @@ export class CreateAuthorComponent implements OnInit {
     this.addAuthor();    
   }
 
+  // routing
   gotoList() {
     this.router.navigate(['/addAuthor']);
   }
 
+  // routing
   list(){
     this.router.navigate(['books']);
   }
@@ -73,14 +72,11 @@ export class CreateAuthorComponent implements OnInit {
   }
 
   deleteAuthor(id: number) {
-    this.authorService.deleteAuthor(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-        this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")
-  }
+    this.authorService.deleteAuthor(id).subscribe(
+        data =>  {console.log('Observer got a next value: ' + data), this.reloadData()},
+        error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Author delete unsuccessful.", "Yannitech BookStore")},
+        () =>    {console.log('Observer got a complete notification'), this.notifyService.showSuccess("Author delete successful.", "Yannitech BookStore")}
+    );   
+    }
 
 }

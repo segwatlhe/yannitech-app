@@ -26,8 +26,14 @@ export class BookListComponent implements OnInit {
   }
 
   reloadData() {
-    this.books = this.bookService.getBookList();
+    this.books = this.bookService.getBookList(); // returning an observable
   }
+
+  // this.bookService.getBookList().subscribe(
+  //   data =>  {console.log('Observer got a next value: ' + data)},
+  //   error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book list could not be retrieved.", "Yannitech BookStore")},
+  //   () =>    {console.log('Observer got a complete notification'), this.notifyService.showInfo("Book delete successful.", "Yannitech BookStore")}
+  // );
 
 
       // Subscribing "kicks off" the observable stream
@@ -53,15 +59,16 @@ export class BookListComponent implements OnInit {
 
   this.bookService.deleteBook(id).subscribe(
     data =>  {console.log('Observer got a next value: ' + data), this.reloadData()},
-    error => {console.error('Observer got an error: ' + error)},
-    () =>    {console.log('Observer got a complete notification'),this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")}
+    error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book delete unsuccessful", "Yannitech BookStore")},
+    () =>    {console.log('Observer got a complete notification'), this.notifyService.showError("Book delete successful.", "Yannitech BookStore")}
   );
-  
+
 }
 
   // routing
   bookDetails(id: number){
     this.router.navigate(['details', id]);
+    this.notifyService.showInfo("Book Details.", "Yannitech BookStore")
   }
 
   // routing

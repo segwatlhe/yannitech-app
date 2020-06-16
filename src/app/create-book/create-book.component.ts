@@ -33,15 +33,11 @@ export class CreateBookComponent implements OnInit {
   }
 
   save() {
-    this.bookService.createBook(this.book)
-      .subscribe(data => {
-        console.log(data);
-        this.reloadData();
-      }
-        , error => console.log(error));
-    this.book = new Book();
-    this.gotoList();
-    this.notifyService.showSuccess("Book save successful", "Yannitech BookStore")
+    this.bookService.createBook(this.book).subscribe(
+      data =>  {console.log('Observer got a next value: ' + data),  this.reloadData(); this.gotoList();},
+      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book save unsuccessful", "Yannitech BookStore")}, 
+      () =>    {console.log('Observer got a complete notification'), console.log('Observer got a complete notification'), this.notifyService.showSuccess("Book save successful", "Yannitech BookStore")}
+      );      
   }
 
   onSubmit() {
@@ -49,11 +45,15 @@ export class CreateBookComponent implements OnInit {
     this.save();    
   }
 
+  // routing
   gotoList() {
     this.router.navigate(['/books']);
     this.reloadData();
   }
+
+  // routing
   list(){
     this.router.navigate(['books']);
   }
+
 }

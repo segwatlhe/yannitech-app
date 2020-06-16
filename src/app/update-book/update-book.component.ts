@@ -28,11 +28,11 @@ export class UpdateBookComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
     
-    this.bookService.getBook(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.book = data;
-      }, error => console.log(error));
+    this.bookService.getBook(this.id).subscribe(
+      data =>  {console.log('Observer got a next value: ' + data), this.book = data},
+      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book list retrieval unsuccessful", "Yannitech BookStore")},
+      () =>    {console.log('Observer got a complete notification')}
+      );
   }
 
   reloadData() {
@@ -40,15 +40,11 @@ export class UpdateBookComponent implements OnInit {
   }
 
   updateBook() {
-    this.bookService.updateBook(this.id, this.book)
-      .subscribe(data => {
-        console.log(data);
-       // this.reloadData();
-      }
-        , error => console.log(error));
-    this.book = new Book();
-    this.gotoList();
-    this.notifyService.showSuccess("Book update successful.", "Yannitech BookStore")
+    this.bookService.updateBook(this.id, this.book).subscribe(
+      data =>  {console.log(data), this.reloadData()},
+      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book update unsuccessful", "Yannitech BookStore")},
+      () => {console.log('Observer got a complete notification'), this.notifyService.showWarning("Book update successful.", "Yannitech BookStore");}
+      );
   }
 
   onSubmit() {
@@ -64,4 +60,5 @@ export class UpdateBookComponent implements OnInit {
   list(){
     this.router.navigate(['books']);
   }
+
 }
