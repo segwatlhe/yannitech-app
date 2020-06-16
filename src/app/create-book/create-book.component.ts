@@ -51,6 +51,7 @@ export class CreateBookComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/books']);
+    this.reloadData();
   }
   list(){
     this.router.navigate(['books']);

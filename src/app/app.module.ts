@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateAuthorComponent } from './create-author/create-author.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookFindComponent } from './book-find/book-find.component';
 
 
@@ -33,8 +32,7 @@ import { BookFindComponent } from './book-find/book-find.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    FontAwesomeModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

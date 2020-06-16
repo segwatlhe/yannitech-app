@@ -36,18 +36,23 @@ export class BookListComponent implements OnInit {
           console.log(data);
           this.reloadData();
         },
-        error => console.log(error));
+        error => console.log(error)
+        );
+
         this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")
   }
 
+  // routing
   bookDetails(id: number){
     this.router.navigate(['details', id]);
   }
 
+  // routing
   updateBook(id: number){
     this.router.navigate(['update', id]);
   }
 
+  // routing
   addAuthor(id: number){
     this.router.navigate(['addAuthor', id]);
   }
@@ -56,6 +61,6 @@ export class BookListComponent implements OnInit {
     //console.log(title);
     this.bookService.findBook(this.book.title).subscribe(data => console.log('1 '+data), error => console.log('2 ' +error));
     this.book = new Book();
-    this.notifyService.showInfo("Book found", "Yannitech BookStore")
+    this.notifyService.showSuccess("Book found", "Yannitech BookStore")
   }
 }

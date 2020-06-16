@@ -43,7 +43,7 @@ export class UpdateBookComponent implements OnInit {
     this.bookService.updateBook(this.id, this.book)
       .subscribe(data => {
         console.log(data);
-        this.reloadData();
+       // this.reloadData();
       }
         , error => console.log(error));
     this.book = new Book();
@@ -55,10 +55,12 @@ export class UpdateBookComponent implements OnInit {
     this.updateBook();    
   }
 
+  // routing
   gotoList() {
     this.router.navigate(['/books']);
   }
 
+  // routing
   list(){
     this.router.navigate(['books']);
   }
