@@ -38,12 +38,21 @@ export class CreateAuthorComponent implements OnInit {
       );
 
       this.books = this.authorService.getAuthorList(this.id);
+
+
+      if(this.interval){
+        clearInterval(this.interval);
+      }
+      this.interval = setInterval(
+        () => {this.reloadData()}, 10000
+        );
   }
   
   newAuthor(): void {
     this.submitted = false;
   }
-
+  data: any;
+  interval: any;
   addAuthor() {
     this.authorService.createAuthor(this.book).subscribe(
       data =>  {console.log('Observer got a next value: ' + data), this.reloadData();},

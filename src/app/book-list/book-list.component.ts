@@ -14,15 +14,25 @@ export class BookListComponent implements OnInit {
 
   // find book
   book: Book = new Book();
-
   books: Observable<Book[]>;
+
+  data: any;
+  interval: any;
 
   constructor(private notifyService : NotificationService, 
               private bookService: BookService, 
               private router: Router) { }
 
   ngOnInit(): void {
-    this.reloadData();
+
+    // refresh the data in a component page after 10 seconds
+    if(this.interval){
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(
+      () => {this.reloadData()}, 10000
+      );
+
   }
 
   reloadData() {
@@ -87,4 +97,5 @@ export class BookListComponent implements OnInit {
     this.book = new Book();
     this.notifyService.showSuccess("Book found", "Yannitech BookStore")
   }
+
 }
