@@ -39,7 +39,7 @@ export class CreateAuthorComponent implements OnInit {
 
       this.books = this.authorService.getAuthorList(this.id);
 
-
+      // refresh the data in a component page after 10 seconds
       if(this.interval){
         clearInterval(this.interval);
       }

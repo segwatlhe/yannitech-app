@@ -16,23 +16,12 @@ export class BookListComponent implements OnInit {
   book: Book = new Book();
   books: Observable<Book[]>;
 
-  data: any;
-  interval: any;
-
   constructor(private notifyService : NotificationService, 
               private bookService: BookService, 
               private router: Router) { }
 
   ngOnInit(): void {
-
-    // refresh the data in a component page after 10 seconds
-    if(this.interval){
-      clearInterval(this.interval);
-    }
-    this.interval = setInterval(
-      () => {this.reloadData()}, 10000
-      );
-
+    this.reloadData()
   }
 
   reloadData() {
@@ -70,7 +59,7 @@ export class BookListComponent implements OnInit {
   this.bookService.deleteBook(id).subscribe(
     data =>  {console.log('Observer got a next value: ' + data), this.reloadData()},
     error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book delete unsuccessful", "Yannitech BookStore")},
-    () =>    {console.log('Observer got a complete notification'), this.notifyService.showError("Book delete successful.", "Yannitech BookStore")}
+    () =>    {console.log('Observer got a complete notification'), this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")}
   );
 
 }
