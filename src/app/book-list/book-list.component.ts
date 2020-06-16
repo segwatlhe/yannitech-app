@@ -29,18 +29,35 @@ export class BookListComponent implements OnInit {
     this.books = this.bookService.getBookList();
   }
 
-  deleteBook(id: number) {
-    this.bookService.deleteBook(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error)
-        );
 
-        this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")
-  }
+      // Subscribing "kicks off" the observable stream
+    // The subscribe method takes in an observer. An observer has three methods:
+    /**
+     1) The method to process each time an item is emitted from the observable. NEXT
+
+     2) The method to process any error that occurs. ERROR
+
+     3) The method to clean up anything when the observer completes. 
+     This last one is seldom used when working with Angular's observables. COMPLETE
+     */
+
+             // this.bookService.deleteBook(id).subscribe(
+        //   data => console.log('Observer got a next value: ' + data),
+        //   error => console.error('Observer got an error: ' + error),
+        //   () => console.log('Observer got a complete notification')
+        // );
+
+  deleteBook(id: number) {
+
+    // this.bookService.deleteBook(id).subscribe();
+
+  this.bookService.deleteBook(id).subscribe(
+    data =>  {console.log('Observer got a next value: ' + data), this.reloadData()},
+    error => {console.error('Observer got an error: ' + error)},
+    () =>    {console.log('Observer got a complete notification'),this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")}
+  );
+  
+}
 
   // routing
   bookDetails(id: number){

@@ -29,6 +29,8 @@ export class BookService {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
+  // an Observable is a stream of events or data. 
+  // They are often returned from Angular methods, such as the http.get
   getBookList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
