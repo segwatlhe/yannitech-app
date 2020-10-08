@@ -1,18 +1,20 @@
-    <h3>Add Author</h3>
+<h3>Add Author</h3>
 <div [hidden]="submitted" style="width: 400px;">
-  <form #addAuthor = "ngForm" (ngSubmit) = "onSubmit(addAuthor.value)">
+  <form #addAuthor="ngForm" (ngSubmit)="onSubmit(addAuthor.value)">
 
     <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Author</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Author</span>
+        </div>
+        <input [(ngModel)]="book.author" autocomplete="off" class="form-control" id="author" name="author"
+               placeholder="Name Initial. Surname" required type="text">
       </div>
-      <input type="text" placeholder="Name Initial. Surname" autocomplete="off" class="form-control" id="author" required [(ngModel)]="book.author" name="author">    
-    </div> 
-  </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary" style="margin-left: 10px">Submit</button>
-    <button (click)="list()" class="btn btn-warning" style="margin-left: 10px">Back</button><br>
+    <button class="btn btn-primary" style="margin-left: 10px" type="submit">Submit</button>
+    <button (click)="list()" class="btn btn-warning" style="margin-left: 10px">Back</button>
+    <br>
   </form>
 
 </div>
@@ -21,21 +23,21 @@
   <div class="panel-body">
     <table class="table table-striped">
       <thead class="thead-dark">
-        <tr>
-          <th scope="w-25">Author</th>
-          <th scope="w-25">Actions</th>
-        </tr>
+      <tr>
+        <th scope="w-25">Author</th>
+        <th scope="w-25">Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr class="table-primary"  *ngFor="let book of books | async">
-          <td>{{book.author}}</td>
-          <td>
-             <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-sm" 
-             style="margin-left: 10px">
-             <a onClick="window.location.reload()"></a>
-             Remove Author <i class="fa fa-user-times" style="font-size:24px"></i></button>
-          </td>
-        </tr>
+      <tr *ngFor="let book of books | async" class="table-primary">
+        <td>{{book.author}}</td>
+        <td>
+          <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-sm"
+                  style="margin-left: 10px">
+            <a onClick="window.location.reload()"></a>
+            Remove Author <i class="fa fa-user-times" style="font-size:24px"></i></button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

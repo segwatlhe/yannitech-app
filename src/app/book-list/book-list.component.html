@@ -1,43 +1,53 @@
 <body>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>Book List<i class="fa fa-quote-left fa-0x fa-pull-left fa-border"></i><i class="fa fa-quote-right fa-0x fa-pull-left fa-border"></i></h2>
-    </div>
-    <div class="panel-body">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Book List<i class="fa fa-quote-left fa-0x fa-pull-left fa-border"></i><i
+      class="fa fa-quote-right fa-0x fa-pull-left fa-border"></i></h2>
+  </div>
+  <div class="panel-body">
 
-      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
       <div class="input-group">
-        <input type="text" autocomplete="off" class="form-control" [(ngModel)]="book.title" name="title"
-        name="search" placeholder="Search for a book..." aria-describedby="basic-addon1">
+        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"
+               name="title" placeholder="Search for a book..." type="text">
         <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
       </div>
     </form>
 
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Category</th>
-            <th scope="col">Title</th>
-            <th scope="col">Year</th>
-            <th scope="col">Price</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-primary" *ngFor="let book of books | async">
-            <td>{{book.category}}</td>
-            <td>{{book.title}}</td>
-            <td>{{book.year}}</td>
-            <td>{{book.price}}</td>
-            <td>
-              <button (click)="deleteBook(book.id)" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Book" style="margin-left: 10px">Remove <i class="fa fa-trash" style="font-size:24px"></i></button>
-              <button (click)="updateBook(book.id)" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Book" style="margin-left: 10px">Edit <i class="fa fa-pencil" style="font-size:24px"></i></button>
-              <button (click)="bookDetails(book.id)" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="View Details about Book" style="margin-left: 10px">Details <i class="fa fa-file-text-o" style="font-size:24px"></i></button>
-              <button (click)="addAuthor(book.id)" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Add Book Author/s" style="margin-left: 10px">Add Author <i class="fa fa-user-plus" style="font-size:24px"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Title</th>
+        <th scope="col">Year</th>
+        <th scope="col">Price</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of books | async" class="table-primary">
+        <td>{{book.category}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.year}}</td>
+        <td>{{book.price}}</td>
+        <td>
+          <button (click)="deleteBook(book.id)" class="btn btn-danger" data-placement="top" data-toggle="tooltip"
+                  style="margin-left: 10px" title="Delete Book">Remove <i class="fa fa-trash"
+                                                                          style="font-size:24px"></i></button>
+          <button (click)="updateBook(book.id)" class="btn btn-warning" data-placement="top" data-toggle="tooltip"
+                  style="margin-left: 10px" title="Edit Book">Edit <i class="fa fa-pencil" style="font-size:24px"></i>
+          </button>
+          <button (click)="bookDetails(book.id)" class="btn btn-info" data-placement="top" data-toggle="tooltip"
+                  style="margin-left: 10px" title="View Details about Book">Details <i class="fa fa-file-text-o"
+                                                                                       style="font-size:24px"></i>
+          </button>
+          <button (click)="addAuthor(book.id)" class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                  style="margin-left: 10px" title="Add Book Author/s">Add Author <i class="fa fa-user-plus"
+                                                                                    style="font-size:24px"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+</div>
 </body>

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthorService {
 
   private baseUrl = 'http://localhost:8080/yannitech/api/book';
-  
+
   constructor(private http: HttpClient) { }
 
   // createAuthor(id: number, author: any): Observable<Object> {
@@ -18,7 +18,7 @@ export class AuthorService {
   // createAuthor(id: number, author: any): Observable<Object> {
   //   return this.http.put(`${this.baseUrl}`, author);
   // }
-  createAuthor(author: any): Observable<Object> {
+  createAuthor(author: any): Observable<any> {
     return this.http.put(`${this.baseUrl}`, author);
   }
 

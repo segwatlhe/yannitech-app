@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from '../model/book';
-import { Observable } from 'rxjs';
-import { BookService } from '../book.service';
-import { Router } from '@angular/router';
-import { NotificationService } from '../service/notification.service';
+import {Component, OnInit} from '@angular/core';
+import {Book} from '../model/book';
+import {Observable, throwError} from 'rxjs';
+import {BookService} from '../book.service';
+import {Router} from '@angular/router';
+import {NotificationService} from '../service/notification.service';
 
 @Component({
   selector: 'app-book-list',
@@ -16,12 +16,13 @@ export class BookListComponent implements OnInit {
   book: Book = new Book();
   books: Observable<Book[]>;
 
-  constructor(private notifyService : NotificationService, 
-              private bookService: BookService, 
-              private router: Router) { }
+  constructor(private notifyService: NotificationService,
+              private bookService: BookService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.reloadData()
+    this.reloadData();
   }
 
   reloadData() {
@@ -35,56 +36,83 @@ export class BookListComponent implements OnInit {
   // );
 
 
-      // Subscribing "kicks off" the observable stream
-    // The subscribe method takes in an observer. An observer has three methods:
-    /**
-     1) The method to process each time an item is emitted from the observable. NEXT
+  // Subscribing "kicks off" the observable stream
+  // The subscribe method takes in an observer. An observer has three methods:
+  /**
+   1) The method to process each time an item is emitted from the observable. NEXT
 
-     2) The method to process any error that occurs. ERROR
+   2) The method to process any error that occurs. ERROR
 
-     3) The method to clean up anything when the observer completes. 
-     This last one is seldom used when working with Angular's observables. COMPLETE
-     */
+   3) The method to clean up anything when the observer completes.
+   This last one is seldom used when working with Angular's observables. COMPLETE
+   */
 
-             // this.bookService.deleteBook(id).subscribe(
-        //   data => console.log('Observer got a next value: ' + data),
-        //   error => console.error('Observer got an error: ' + error),
-        //   () => console.log('Observer got a complete notification')
-        // );
+  // this.bookService.deleteBook(id).subscribe(
+  //   data => console.log('Observer got a next value: ' + data),
+  //   error => console.error('Observer got an error: ' + error),
+  //   () => console.log('Observer got a complete notification')
+  // );
 
   deleteBook(id: number) {
 
     // this.bookService.deleteBook(id).subscribe();
 
-  this.bookService.deleteBook(id).subscribe(
-    data =>  {console.log('Observer got a next value: ' + data), this.reloadData()},
-    error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book delete unsuccessful", "Yannitech BookStore")},
-    () =>    {console.log('Observer got a complete notification'), this.notifyService.showSuccess("Book delete successful.", "Yannitech BookStore")}
-  );
+    this.bookService.deleteBook(id).subscribe(
+      data => {
+        console.log('Observer got a next value: ' + data);
+        this.reloadData();
+      },
+      error => {
+        console.error('Observer got an error: ' + error);
+        this.notifyService.showError('Book delete unsuccessful', 'Yannitech BookStore');
+      },
+      () => {
+        console.log('Observer got a complete notification');
+        this.notifyService.showSuccess('Book delete successful.', 'Yannitech BookStore');
+      }
+    );
 
-}
-
-  // routing
-  bookDetails(id: number){
-    this.router.navigate(['details', id]);
-    this.notifyService.showInfo("Book Details.", "Yannitech BookStore")
   }
 
   // routing
-  updateBook(id: number){
+  bookDetails(id: number) {
+    this.router.navigate(['details', id]);
+    this.notifyService.showInfo('Book Details.', 'Yannitech BookStore');
+  }
+
+  // routing
+  updateBook(id: number) {
     this.router.navigate(['update', id]);
   }
 
   // routing
-  addAuthor(id: number){
+  addAuthor(id: number) {
     this.router.navigate(['addAuthor', id]);
   }
 
-  onSubmit(form){
-    //console.log(title);
-    this.bookService.findBook(this.book.title).subscribe(data => console.log('1 '+data), error => console.log('2 ' +error));
+  onSubmit(form) {
+    this.bookService.findBook(this.book.title).subscribe(data => {
+      console.log('1 ' + data);
+    }, error => {
+      console.log('2 ' + error);
+    });
     this.book = new Book();
-    this.notifyService.showSuccess("Book found", "Yannitech BookStore")
+    this.notifyService.showSuccess('Book found', 'Yannitech BookStore');
   }
 
+  // error handling
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+      console.log('client-side error ' + errorMessage);
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.log('server-side error ' + errorMessage);
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
 }

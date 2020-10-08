@@ -1,48 +1,49 @@
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
   <!-- Links -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <ul class="navbar-nav">
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <a routerLink="books" class="breadcrumb-item active" aria-current="page" routerLinkActive="active"><b>Home</b></a>
+        <a aria-current="page" class="breadcrumb-item active" routerLink="books"
+           routerLinkActive="active"><b>Home</b></a>
       </ol>
     </nav>
     &nbsp;
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <a routerLink="add" class="breadcrumb-item active" aria-current="page" routerLinkActive="active"><b>Add Book</b></a>
+        <a aria-current="page" class="breadcrumb-item active" routerLink="add" routerLinkActive="active"><b>Add Book</b></a>
       </ol>
     </nav>
 
   </ul>
 </nav>
 <div class="body">
-<div class="container-md" style="margin-top: 70px;">
-  <br>
-  <h2 style="text-align: center;">{{title}}</h2>
-  <hr>  
+  <div class="container-md" style="margin-top: 70px;">
+    <br>
+    <h2 style="text-align: center;">{{title}}</h2>
+    <hr>
 
-  <div class="row">
-    <div class="col-sm-12">
-  <div class="card w-100">
-    <div class="card-header">
-      <b>Bookstore</b> <i class="fa fa-book " style="font-size:36px;color:rgb(225, 196, 253)"></i>
-    </div>
-    <div class="card-body">
-      <div class="col-sm-10 offset-sm-1">
-        <router-outlet></router-outlet>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card w-100">
+          <div class="card-header">
+            <b>Bookstore</b> <i class="fa fa-book " style="font-size:36px;color:rgb(225, 196, 253)"></i>
+          </div>
+          <div class="card-body">
+            <div class="col-sm-10 offset-sm-1">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    </div>
-  </div>
 
 
-</div>
+  </div>
 </div>
 <footer class="footer">
   <div class="container">
-      <span>All Rights Reserved 2020 @Benny Segwatlhe</span>
+    <span>All Rights Reserved 2020 @Benny Segwatlhe</span>
   </div>
 </footer>
