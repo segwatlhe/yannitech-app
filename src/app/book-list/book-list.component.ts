@@ -64,6 +64,7 @@ export class BookListComponent implements OnInit {
       },
       error => {
         console.error('Observer got an error: ' + error);
+        this.handleError(error);
         this.notifyService.showError('Book delete unsuccessful', 'Yannitech BookStore');
       },
       () => {

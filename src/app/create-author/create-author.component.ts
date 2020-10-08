@@ -71,6 +71,7 @@ export class CreateAuthorComponent implements OnInit {
       },
       error => {
         console.error('Observer got an error: ' + error);
+        this.handleError(error);
         this.notifyService.showError('Author not added.', 'Yannitech BookStore');
       },
       () => {
