@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from '../model/book';
-import { BookService } from '../book.service';
-import { Router } from '@angular/router';
-import { NotificationService } from '../service/notification.service';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Book} from '../model/book';
+import {BookService} from '../book.service';
+import {Router} from '@angular/router';
+import {NotificationService} from '../service/notification.service';
+import {Observable, throwError} from 'rxjs';
 
 @Component({
   selector: 'app-create-book',
@@ -16,16 +16,12 @@ export class CreateBookComponent implements OnInit {
   books: Observable<Book[]>;
   submitted = false;
 
-  constructor(private notifyService : NotificationService, 
-              private bookService: BookService, 
-              private router: Router) { }
-
-  ngOnInit() {
+  constructor(private notifyService: NotificationService,
+              private bookService: BookService,
+              private router: Router) {
   }
 
-  newBook(): void {
-    this.submitted = false;
-    this.book = new Book();
+  ngOnInit() {
   }
 
   reloadData() {
@@ -34,15 +30,27 @@ export class CreateBookComponent implements OnInit {
 
   save() {
     this.bookService.createBook(this.book).subscribe(
-      data =>  {console.log('Observer got a next value: ' + data),  this.reloadData(); this.gotoList();},
-      error => {console.error('Observer got an error: ' + error), this.notifyService.showError("Book save unsuccessful", "Yannitech BookStore")}, 
-      () =>    {console.log('Observer got a complete notification'), console.log('Observer got a complete notification'), this.notifyService.showSuccess("Book save successful", "Yannitech BookStore")}
-      );      
+      data => {
+        console.log('Observer got a next value: ' + data);
+        this.reloadData();
+        this.gotoList();
+      },
+      error => {
+        console.error('Observer got an error: ' + error);
+        this.handleError(error);
+        this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
+      },
+      () => {
+        console.log('Observer got a complete notification');
+        console.log('Observer got a complete notification');
+        this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
+      }
+    );
   }
 
   onSubmit() {
     this.submitted = true;
-    this.save();    
+    this.save();
   }
 
   // routing
@@ -52,8 +60,23 @@ export class CreateBookComponent implements OnInit {
   }
 
   // routing
-  list(){
+  list() {
     this.router.navigate(['books']);
   }
 
+  // error handling
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+      console.log('client-side error ' + errorMessage);
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.log('server-side error ' + errorMessage);
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
 }
