@@ -25,7 +25,6 @@ export class BookDetailsComponent implements OnInit {
 
     this.bookService.getBook(this.id)
       .subscribe(data => {
-        console.log(data);
         this.book = data;
       }, error => {
         this.handleError(error);
