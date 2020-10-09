@@ -104,15 +104,13 @@ export class BookListComponent implements OnInit {
 
   onSubmit(form) {
     this.bookService.findBook(this.book.title).subscribe(
-      data => {
-        console.log('1 ' + data);
+      () => {
+        this.notifyService.showError('Book found', 'Yannitech BookStore');
       },
       error => {
-        console.log('2 ' + error);
         this.handleError(error);
+        this.notifyService.showError('Book not found', 'Yannitech BookStore');
       });
-    this.book = new Book();
-    this.notifyService.showSuccess('Book found', 'Yannitech BookStore');
   }
 
   // error handling
