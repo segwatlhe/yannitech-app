@@ -58,7 +58,7 @@ export class UpdateBookComponent implements OnInit {
       },
       () => {
         console.log('Observer got a complete notification');
-        this.notifyService.showWarning('Book update successful.', 'Yannitech BookStore');
+        this.notifyService.showSuccess('Book update successful.', 'Yannitech BookStore');
       }
     );
   }
