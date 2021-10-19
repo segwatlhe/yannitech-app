@@ -26,6 +26,7 @@ export class BookListComponent implements OnInit {
   }
 
   reloadData() {
+    this.notifyService.showInfo('Welcome', 'Yannitech');
     this.books = this.bookService.getBookList(); // returning an observable
   }
 
