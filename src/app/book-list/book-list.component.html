@@ -7,7 +7,15 @@
   <p hidden>This paragraph is not visible on the page, it is hidden from the HTML.</p>
   <div class="panel-body">
 
-    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<!--    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">-->
+<!--      <div class="input-group">-->
+<!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
+<!--               name="title" placeholder="Search for a book..." type="text">-->
+<!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
+<!--      </div>-->
+<!--    </form>-->
+
+    <form>
       <div class="input-group">
         <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"
                name="title" placeholder="Search for a book..." type="text">

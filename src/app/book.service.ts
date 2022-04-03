@@ -7,9 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class BookService {
 
-  private baseUrl = 'http://localhost:8080/yannitech/api/books';
-  private findBookUrl = 'http://localhost:8080/yannitech/api/findbook?title=';
-
+  private baseUrl = 'http://localhost:8080/api/books';
 
   constructor(private http: HttpClient) {
   }
@@ -34,9 +32,5 @@ export class BookService {
   // They are often returned from Angular methods, such as the http.get
   getBookList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
-  }
-
-  findBook(value: any): Observable<any> {
-    return this.http.get(`${this.findBookUrl}${value}`);
   }
 }

@@ -7,7 +7,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Author</span>
         </div>
-        <input [(ngModel)]="book.author" autocomplete="off" class="form-control" id="author" name="author"
+        <input [(ngModel)]="book.authorName" autocomplete="off" class="form-control" id="author" name="author"
                placeholder="Name Initial. Surname" required type="text">
       </div>
     </div>
@@ -30,7 +30,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let book of books | async" class="table-primary">
-        <td>{{book.author}}</td>
+        <td>{{book.authorName}}</td>
         <td>
           <button (click)="deleteAuthor(book.id)" class="btn btn-danger btn-sm"
                   style="margin-left: 10px">

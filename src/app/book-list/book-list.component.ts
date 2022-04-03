@@ -39,31 +39,6 @@ export class BookListComponent implements OnInit {
    () => This last one is seldom used when working with Angular's observables. COMPLETE
    */
 
-  /* EXAMPLE
-   method() {
-    this.bookService.getBookList().subscribe(
-      data => {
-        console.log('Observer got a next value: ' + data);
-      },
-      error => {
-        console.error('Observer got an error: ' + error);
-        this.notifyService.showError('Book list could not be retrieved.', 'Yannitech BookStore');
-      },
-      () => {
-        console.log('Observer got a complete notification');
-        this.notifyService.showInfo('Book delete successful.', 'Yannitech BookStore');
-      }
-    );
-  }
-   */
-
-  // EXAMPLE
-  // this.bookService.deleteBook(id).subscribe(
-  //   data => console.log('Observer got a next value: ' + data),
-  //   error => console.error('Observer got an error: ' + error),
-  //   () => console.log('Observer got a complete notification')
-  // );
-
   deleteBook(id: number) {
 
     // this.bookService.deleteBook(id).subscribe();
@@ -102,16 +77,16 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['addAuthor', id]);
   }
 
-  onSubmit(form) {
-    this.bookService.findBook(this.book.title).subscribe(
-      () => {
-        this.notifyService.showWarning('Book not found', 'Yannitech BookStore');
-      },
-      error => {
-        this.handleError(error);
-        this.notifyService.showError('Book not found', 'Yannitech BookStore');
-      });
-  }
+  // onSubmit(form) {
+  //   this.bookService.findBook(this.book.title).subscribe(
+  //     () => {
+  //       this.notifyService.showWarning('Book not found', 'Yannitech BookStore');
+  //     },
+  //     error => {
+  //       this.handleError(error);
+  //       this.notifyService.showError('Book not found', 'Yannitech BookStore');
+  //     });
+  // }
 
   // error handling
   handleError(error) {
