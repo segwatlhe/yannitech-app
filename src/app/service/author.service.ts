@@ -7,27 +7,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthorService {
 
-  private baseUrl = 'http://localhost:8080/api/book';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
-  // createAuthor(id: number, author: any): Observable<Object> {
-  //   return this.http.post(`${this.baseUrl}/${id}`, author);
-  // }
-
-  // createAuthor(id: number, author: any): Observable<Object> {
-  //   return this.http.put(`${this.baseUrl}`, author);
-  // }
-  createAuthor(author: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}`, author);
+  createAuthor(id: number): Observable<any> {
+    console.log('service ' + id);
+    return this.http.put(`${this.baseUrl}/author/add`, id);
   }
 
   getAuthorList(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}/authors`);
+    return this.http.get(`${this.baseUrl}/author/list/${id}`);
   }
 
   deleteAuthor(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/author/remove/${id}`);
   }
 
 }
