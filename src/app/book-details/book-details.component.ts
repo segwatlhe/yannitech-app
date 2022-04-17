@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../model/book';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BookService} from '../book.service';
+import {BookService} from '../service/book.service';
 import {throwError} from 'rxjs';
 
 @Component({

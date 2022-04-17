@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class BookService {
 
-  private baseUrl = 'http://localhost:8080/api/books';
+  private baseUrl = 'http://localhost:8080/api/book';
 
   constructor(private http: HttpClient) {
   }
@@ -17,20 +17,19 @@ export class BookService {
   }
 
   createBook(book: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, book);
+    return this.http.post(`${this.baseUrl}/save`, book);
   }
 
   updateBook(id: number, value: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+    return this.http.put(`${this.baseUrl}/edit/${id}`, value);
   }
 
   deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, {responseType: 'text'});
+    return this.http.delete(`${this.baseUrl}/delete/${id}`, {responseType: 'text'});
   }
 
   // an Observable is a stream of events or data.
-  // They are often returned from Angular methods, such as the http.get
   getBookList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/list`);
   }
 }

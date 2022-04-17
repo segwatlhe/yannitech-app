@@ -11,9 +11,8 @@ export class AuthorService {
 
   constructor(private http: HttpClient) { }
 
-  createAuthor(id: number): Observable<any> {
-    console.log('service ' + id);
-    return this.http.put(`${this.baseUrl}/author/add`, id);
+  addAuthor(id: number, value: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/author/add/${id}`, value);
   }
 
   getAuthorList(id: number): Observable<any> {

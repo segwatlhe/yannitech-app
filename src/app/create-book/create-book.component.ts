@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../model/book';
-import {BookService} from '../book.service';
+import {BookService} from '../service/book.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../service/notification.service';
 import {Observable, throwError} from 'rxjs';
