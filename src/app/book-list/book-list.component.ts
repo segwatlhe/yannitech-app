@@ -26,7 +26,6 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBooks();
-    this.reloadData();
     this.buildRegistrationFrom();
   }
 
@@ -48,10 +47,6 @@ export class BookListComponent implements OnInit {
     );
   }
 
-  reloadData() {
-    // this.books = this.bookService.getBookList(); // returning an observable
-  }
-
   // Subscribing "kicks off" the observable stream
   // ***** The subscribe method takes in an observer. An observer has three methods: ****
 
@@ -66,14 +61,14 @@ export class BookListComponent implements OnInit {
 
     this.bookService.deleteBook(id).subscribe(
       data => {
-        this.reloadData();
+        this.notifyService.showSuccess('Book delete successful.', 'Yannitech BookStore');
       },
       error => {
         this.handleError(error);
         this.notifyService.showError('Book delete unsuccessful', 'Yannitech BookStore');
       },
       () => {
-        this.notifyService.showSuccess('Book delete successful.', 'Yannitech BookStore');
+        this.getBooks();
       }
     );
 
@@ -82,7 +77,7 @@ export class BookListComponent implements OnInit {
   // routing
   bookDetails(id: number) {
     this.router.navigate(['details', id]);
-    this.notifyService.showInfo('Book Details.', 'Yannitech BookStore');
+    this.notifyService.showWarning('Book Details cannot be edited.', 'Yannitech BookStore');
   }
 
   // routing
@@ -99,9 +94,11 @@ export class BookListComponent implements OnInit {
     this.bookService.search(this.searchForm.get('title').value).subscribe(
       data => {
         this.books = data.content;
+        this.notifyService.showInfo('Search completed.', 'Yannitech BookStore');
       },
       error => {
         this.handleError(error);
+        this.notifyService.showError('Unable to search.', 'Yannitech BookStore');
       }
     );
   }

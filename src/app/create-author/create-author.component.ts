@@ -6,6 +6,7 @@ import {BookService} from '../service/book.service';
 import {AuthorService} from '../service/author.service';
 import {throwError} from 'rxjs';
 import {Author} from '../model/author';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-author',
@@ -14,86 +15,71 @@ import {Author} from '../model/author';
 })
 export class CreateAuthorComponent implements OnInit {
 
-  public submitted: boolean = false;
-
   id: number;
   author: Author;
   authors: Author[];
   books: Book[];
-
-  data: any;
-  interval: any;
+  authorForm: FormGroup;
 
   constructor(private notifyService: NotificationService,
               private route: ActivatedRoute,
               private router: Router,
               private bookService: BookService,
-              private authorService: AuthorService) {
+              private authorService: AuthorService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.author = new Author();
 
-    this.id = this.route.snapshot.params['id'];
-
+    this.id = this.route.snapshot.params.id;
     this.bookService.getBook(this.id).subscribe();
-    this.list2(this.id);
+    this.authorList(this.id);
 
-    // refresh the data in a component page after 10 seconds
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-    this.interval = setInterval(
-      () => {
-        this.reloadData();
-      }, 10000
-    );
+    this.buildRegistrationFrom();
   }
 
-  addAuthor() {
-    this.authorService.addAuthor(this.id, this.author).subscribe(
-      data => {
-        this.reloadData();
-      },
-      error => {
-        this.handleError(error);
-        this.notifyService.showError('Author not added.', 'Yannitech BookStore');
-      },
-      () => {
-        this.notifyService.showSuccess('Author added successfully.', 'Yannitech BookStore');
+  buildRegistrationFrom() {
+    this.authorForm = this.fb.group({
+      authorName: new FormControl('', Validators.required)
       }
     );
   }
 
-  onSubmit(data) {
-    this.addAuthor();
+  addAuthor() {
+
+    this.author = new Author();
+    this.author.authorName = this.authorForm.get('authorName').value;
+
+    this.authorService.addAuthor(this.id, this.author).subscribe(
+      data => {
+        this.authorList(this.id);
+        this.notifyService.showSuccess('Author added successfully.', 'Yannitech BookStore');
+      },
+      error => {
+        this.handleError(error);
+        this.notifyService.showError('Author not added.', 'Yannitech BookStore');
+      }
+    );
   }
 
-  list() {
+  bookList() {
     this.router.navigate(['books']);
-  }
-
-  reloadData() {
-   // this.books = this.authorService.getAuthorList(this.id);
-   // this.authors = this.authorService.getAuthorList(this.id);
   }
 
   deleteAuthor(id: number) {
     this.authorService.deleteAuthor(id).subscribe(
       data => {
-        this.reloadData();
+        this.authorList(this.id);
+        this.notifyService.showSuccess('Author delete successful.', 'Yannitech BookStore');
       },
       error => {
         this.handleError(error);
         this.notifyService.showError('Author delete unsuccessful.', 'Yannitech BookStore');
-      },
-      () => {
-        this.notifyService.showSuccess('Author delete successful.', 'Yannitech BookStore');
       }
     );
   }
 
-  list2(id: number){
+  authorList(id: number){
     this.authorService.getAuthorList(id).subscribe(
       data => {
         this.authors = data;
@@ -116,4 +102,5 @@ export class CreateAuthorComponent implements OnInit {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
 }

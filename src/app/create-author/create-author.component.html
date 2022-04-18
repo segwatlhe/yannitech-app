@@ -1,19 +1,22 @@
 <h3>Add Author</h3>
-<div [hidden]="submitted" style="width: 400px;">
-  <form #addAuthor="ngForm" (ngSubmit)="onSubmit(addAuthor.value)">
+<div style="width: 400px;">
+  <form [formGroup]="authorForm">
 
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">Author</span>
         </div>
-        <input [(ngModel)]="author.authorName" autocomplete="off" class="form-control" id="author" name="author"
+        <input formControlName="authorName"
+               autocomplete="off"
+               class="form-control"
+               id="authorName"
+               name="authorName"
                placeholder="Name Initial. Surname" required type="text">
       </div>
     </div>
-
-    <button class="btn btn-primary" style="margin-left: 10px" type="submit">Submit</button>
-    <button (click)="list()" class="btn btn-warning" style="margin-left: 10px">Back</button>
+    <button (click)="addAuthor()" class="btn btn-primary" style="margin-left: 10px" type="submit">Submit</button>
+    <button (click)="bookList()" class="btn btn-warning" style="margin-left: 10px">Back</button>
     <br>
   </form>
 
