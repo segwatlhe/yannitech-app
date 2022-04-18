@@ -100,6 +100,7 @@ export class CreateAuthorComponent implements OnInit {
       }
     );
   }
+
   // error handling
   handleError(error) {
     let errorMessage = '';

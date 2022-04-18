@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from '../model/book';
 import {BookService} from '../service/book.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../service/notification.service';
-import {Observable, throwError} from 'rxjs';
+import {throwError} from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-book',
@@ -12,52 +12,48 @@ import {Observable, throwError} from 'rxjs';
 })
 export class CreateBookComponent implements OnInit {
 
-  book: Book = new Book();
-  books: Observable<Book[]>;
-  submitted = false;
+  bookForm: FormGroup;
 
   constructor(private notifyService: NotificationService,
               private bookService: BookService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
+    this.buildRegistrationFrom();
   }
 
-  reloadData() {
-    this.books = this.bookService.getBookList();
-  }
-
-  save() {
-    this.bookService.createBook(this.book).subscribe(
-      () => {
-        this.reloadData();
-        this.gotoList();
-      },
-      error => {
-        this.handleError(error);
-        this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
-      },
-      () => {
-        this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
+  buildRegistrationFrom() {
+    this.bookForm = this.fb.group({
+      category: new FormControl('', Validators.required),
+      title: new FormControl('', [Validators.required]),
+      year: new FormControl('', [Validators.maxLength(4)]),
+      price: new FormControl('', [Validators.required])
       }
     );
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();
+  save() {
+    if (this.bookForm.valid) {
+      this.bookService.createBook(this.bookForm.value).subscribe(
+        () => {
+          this.gotoList();
+        },
+        error => {
+          this.handleError(error);
+          this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
+        },
+        () => {
+          this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
+        }
+      );
+    }
   }
 
   // routing
   gotoList() {
     this.router.navigate(['/books']);
-    this.reloadData();
-  }
-
-  // routing
-  list() {
-    this.router.navigate(['books']);
   }
 
   // error handling

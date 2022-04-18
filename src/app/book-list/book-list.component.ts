@@ -26,7 +26,6 @@ export class BookListComponent implements OnInit {
   }
 
   reloadData() {
-    this.notifyService.showInfo('Welcome', 'Yannitech');
     this.books = this.bookService.getBookList(); // returning an observable
   }
 
@@ -42,20 +41,15 @@ export class BookListComponent implements OnInit {
 
   deleteBook(id: number) {
 
-    // this.bookService.deleteBook(id).subscribe();
-
     this.bookService.deleteBook(id).subscribe(
       data => {
-        console.log('Observer got a next value: ' + data);
         this.reloadData();
       },
       error => {
-        console.error('Observer got an error: ' + error);
         this.handleError(error);
         this.notifyService.showError('Book delete unsuccessful', 'Yannitech BookStore');
       },
       () => {
-        console.log('Observer got a complete notification');
         this.notifyService.showSuccess('Book delete successful.', 'Yannitech BookStore');
       }
     );
@@ -77,17 +71,6 @@ export class BookListComponent implements OnInit {
   addAuthor(id: number) {
     this.router.navigate(['addAuthor', id]);
   }
-
-  // onSubmit(form) {
-  //   this.bookService.findBook(this.book.title).subscribe(
-  //     () => {
-  //       this.notifyService.showWarning('Book not found', 'Yannitech BookStore');
-  //     },
-  //     error => {
-  //       this.handleError(error);
-  //       this.notifyService.showError('Book not found', 'Yannitech BookStore');
-  //     });
-  // }
 
   // error handling
   handleError(error) {
