@@ -15,11 +15,23 @@
 <!--      </div>-->
 <!--    </form>-->
 
-    <form>
+<!--    <form>-->
+<!--      <div class="input-group">-->
+<!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
+<!--               name="title" placeholder="Search for a book..." type="text">-->
+<!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
+<!--      </div>-->
+<!--    </form>-->
+
+    <form [formGroup]="searchForm">
       <div class="input-group">
-        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"
+        <input formControlName="title"
+               aria-describedby="basic-addon1"
+               autocomplete="off"
+               class="form-control"
+               name="search"
                name="title" placeholder="Search for a book..." type="text">
-        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
+        <button type="submit" (click)="search()"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
       </div>
     </form>
 
@@ -34,6 +46,7 @@
       </tr>
       </thead>
       <tbody>
+<!--      <tr *ngFor="let book of books | paginate: { itemsPerPage: countCustomer, currentPage: pageCustomer }" class="table-primary">-->
       <tr *ngFor="let book of books | async" class="table-primary">
         <td>{{book.category}}</td>
         <td>{{book.title}}</td>

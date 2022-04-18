@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {BookService} from '../service/book.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../service/notification.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-book-list',
@@ -12,17 +13,29 @@ import {NotificationService} from '../service/notification.service';
 })
 export class BookListComponent implements OnInit {
 
+  searchForm: FormGroup;
+  pageCustomer = 1;
+  countCustomer = 10;
   // find book
   book: Book = new Book();
   books: Observable<Book[]>;
 
   constructor(private notifyService: NotificationService,
               private bookService: BookService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.reloadData();
+    this.buildRegistrationFrom();
+  }
+
+  buildRegistrationFrom() {
+    this.searchForm = this.fb.group({
+        title: new FormControl('')
+      }
+    );
   }
 
   reloadData() {
@@ -72,6 +85,10 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['addAuthor', id]);
   }
 
+  search() {
+    this.bookService.search(this.searchForm.value);
+  }
+
   // error handling
   handleError(error) {
     let errorMessage = '';
@@ -87,4 +104,5 @@ export class BookListComponent implements OnInit {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
 }

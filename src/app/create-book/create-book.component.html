@@ -6,7 +6,10 @@
       <div class="input-group-prepend">
         <span class="input-group-text">Category</span>
       </div>
-      <input autocomplete="off" class="form-control" formControlName="category" id="category"
+      <input autocomplete="off"
+             class="form-control"
+             formControlName="category"
+             id="category"
              name="category"
              placeholder="Category"
              required type="text">
@@ -30,7 +33,12 @@
       <div class="input-group-prepend">
         <span class="input-group-text">Year</span>
       </div>
-      <input autocomplete="off" class="form-control" formControlName="year" id="year" name="year" placeholder="Year"
+      <input autocomplete="off"
+             class="form-control"
+             formControlName="year"
+             id="year"
+             name="year"
+             placeholder="Year"
              required
              required type="text">
     </div>
@@ -44,7 +52,7 @@
     </div>
   </div>
   <button (click)="save()" class="btn btn-primary" style="margin-left: 10px" type="submit">Submit</button>
-  <button (click)="list()" class="btn btn-warning" style="margin-left: 10px">Back</button>
+  <button (click)="gotoList()" class="btn btn-warning" style="margin-left: 10px">Back</button>
   <br>
 
 </form>

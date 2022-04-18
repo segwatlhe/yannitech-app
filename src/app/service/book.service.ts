@@ -32,4 +32,9 @@ export class BookService {
   getBookList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/list`);
   }
+
+  search(title: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/search?title=${title}`);
+  }
+
 }
