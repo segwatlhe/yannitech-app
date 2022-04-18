@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../model/book';
-import {Observable, throwError} from 'rxjs';
+import {throwError} from 'rxjs';
 import {BookService} from '../service/book.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../service/notification.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-book-list',
@@ -16,9 +16,7 @@ export class BookListComponent implements OnInit {
   searchForm: FormGroup;
   pageCustomer = 1;
   countCustomer = 10;
-  // find book
-  book: Book = new Book();
-  books: Observable<Book[]>;
+  books: Book[];
 
   constructor(private notifyService: NotificationService,
               private bookService: BookService,
@@ -27,8 +25,20 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getBooks();
     this.reloadData();
     this.buildRegistrationFrom();
+  }
+
+  getBooks() {
+    this.bookService.getBookList().subscribe(
+      data => {
+        this.books = data;
+      },
+      error => {
+        this.handleError(error);
+      }
+    );
   }
 
   buildRegistrationFrom() {
@@ -39,7 +49,7 @@ export class BookListComponent implements OnInit {
   }
 
   reloadData() {
-    this.books = this.bookService.getBookList(); // returning an observable
+    // this.books = this.bookService.getBookList(); // returning an observable
   }
 
   // Subscribing "kicks off" the observable stream
@@ -86,7 +96,14 @@ export class BookListComponent implements OnInit {
   }
 
   search() {
-    this.bookService.search(this.searchForm.value);
+    this.bookService.search(this.searchForm.get('title').value).subscribe(
+      data => {
+        this.books = data.content;
+      },
+      error => {
+        this.handleError(error);
+      }
+    );
   }
 
   // error handling

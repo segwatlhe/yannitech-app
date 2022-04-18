@@ -7,69 +7,80 @@
   <p hidden>This paragraph is not visible on the page, it is hidden from the HTML.</p>
   <div class="panel-body">
 
-<!--    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">-->
-<!--      <div class="input-group">-->
-<!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
-<!--               name="title" placeholder="Search for a book..." type="text">-->
-<!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
-<!--      </div>-->
-<!--    </form>-->
+    <!--    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">-->
+    <!--      <div class="input-group">-->
+    <!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
+    <!--               name="title" placeholder="Search for a book..." type="text">-->
+    <!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
+    <!--      </div>-->
+    <!--    </form>-->
 
-<!--    <form>-->
-<!--      <div class="input-group">-->
-<!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
-<!--               name="title" placeholder="Search for a book..." type="text">-->
-<!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
-<!--      </div>-->
-<!--    </form>-->
+    <!--    <form>-->
+    <!--      <div class="input-group">-->
+    <!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
+    <!--               name="title" placeholder="Search for a book..." type="text">-->
+    <!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
+    <!--      </div>-->
+    <!--    </form>-->
 
     <form [formGroup]="searchForm">
       <div class="input-group">
-        <input formControlName="title"
-               aria-describedby="basic-addon1"
+        <input aria-describedby="basic-addon1"
                autocomplete="off"
                class="form-control"
+               formControlName="title"
                name="search"
                name="title" placeholder="Search for a book..." type="text">
-        <button type="submit" (click)="search()"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
+        <button (click)="search()" type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
+      </div>
+      <!--    </form>-->
+
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Title</th>
+          <th scope="col">Year</th>
+          <th scope="col">Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of books | paginate: { itemsPerPage: countCustomer, currentPage: pageCustomer }"
+            class="table-primary">
+          <!--      <tr *ngFor="let book of books | async" class="table-primary">-->
+          <td>{{book.category}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.year}}</td>
+          <td>{{book.price}}</td>
+          <td>
+            <button (click)="deleteBook(book.id)" class="btn btn-danger" data-placement="top" data-toggle="tooltip"
+                    style="margin-left: 10px" title="Delete Book">Remove <i class="fa fa-trash"
+                                                                            style="font-size:24px"></i></button>
+            <button (click)="updateBook(book.id)" class="btn btn-warning" data-placement="top" data-toggle="tooltip"
+                    style="margin-left: 10px" title="Edit Book">Edit <i class="fa fa-pencil" style="font-size:24px"></i>
+            </button>
+            <button (click)="bookDetails(book.id)" class="btn btn-info" data-placement="top" data-toggle="tooltip"
+                    style="margin-left: 10px" title="View Details about Book">Details <i class="fa fa-file-text-o"
+                                                                                         style="font-size:24px"></i>
+            </button>
+            <button (click)="addAuthor(book.id)" class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                    style="margin-left: 10px" title="Add Book Author/s">Add Author <i class="fa fa-user-plus"
+                                                                                      style="font-size:24px"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col">
+          <div class="float-right">
+            <pagination-controls
+              (pageChange)="pageCustomer = $event"></pagination-controls>
+          </div>
+        </div>
       </div>
     </form>
-
-    <table class="table table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">Category</th>
-        <th scope="col">Title</th>
-        <th scope="col">Year</th>
-        <th scope="col">Price</th>
-        <th scope="col">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-<!--      <tr *ngFor="let book of books | paginate: { itemsPerPage: countCustomer, currentPage: pageCustomer }" class="table-primary">-->
-      <tr *ngFor="let book of books | async" class="table-primary">
-        <td>{{book.category}}</td>
-        <td>{{book.title}}</td>
-        <td>{{book.year}}</td>
-        <td>{{book.price}}</td>
-        <td>
-          <button (click)="deleteBook(book.id)" class="btn btn-danger" data-placement="top" data-toggle="tooltip"
-                  style="margin-left: 10px" title="Delete Book">Remove <i class="fa fa-trash"
-                                                                          style="font-size:24px"></i></button>
-          <button (click)="updateBook(book.id)" class="btn btn-warning" data-placement="top" data-toggle="tooltip"
-                  style="margin-left: 10px" title="Edit Book">Edit <i class="fa fa-pencil" style="font-size:24px"></i>
-          </button>
-          <button (click)="bookDetails(book.id)" class="btn btn-info" data-placement="top" data-toggle="tooltip"
-                  style="margin-left: 10px" title="View Details about Book">Details <i class="fa fa-file-text-o"
-                                                                                       style="font-size:24px"></i>
-          </button>
-          <button (click)="addAuthor(book.id)" class="btn btn-primary" data-placement="top" data-toggle="tooltip"
-                  style="margin-left: 10px" title="Add Book Author/s">Add Author <i class="fa fa-user-plus"
-                                                                                    style="font-size:24px"></i></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 </body>

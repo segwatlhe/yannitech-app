@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,13 @@ export class BookService {
     return this.http.get(`${this.baseUrl}/list`);
   }
 
-  search(title: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/search?title=${title}`);
+  search(title: string): Observable<any> {
+    console.log('search ' + title);
+    return this.http.get(`${this.baseUrl}/search?title=${title}&sort=title,desc`).pipe(map(
+      data => {
+        console.log('pipe ', data);
+        return data;
+      }));
   }
 
 }
