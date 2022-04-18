@@ -37,7 +37,6 @@ export class BookService {
   search(title: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/search?title=${title}&sort=title,desc`).pipe(map(
       data => {
-        console.log('pipe ', data);
         return data;
       }));
   }
