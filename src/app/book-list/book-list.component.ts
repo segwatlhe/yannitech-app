@@ -13,16 +13,28 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 })
 export class BookListComponent implements OnInit {
 
-  searchForm: FormGroup;
-  pageCustomer = 1;
-  countCustomer = 10;
-  books: Book[];
-
   constructor(private notifyService: NotificationService,
               private bookService: BookService,
               private router: Router,
               private fb: FormBuilder) {
   }
+
+  searchForm: FormGroup;
+  pageCustomer = 1;
+  countCustomer = 10;
+  books: Book[];
+
+  // Subscribing "kicks off" the observable stream
+  // ***** The subscribe method takes in an observer. An observer has three methods: ****
+
+  /****
+   1) The method to process each time an item is emitted from the observable. NEXT;
+   2) The method to process any error that occurs. ERROR;
+   3) The method to clean up anything when the observer completes.;
+   () => This last one is seldom used when working with Angular's observables. COMPLETE
+   */
+
+  book: Book;
 
   ngOnInit(): void {
     this.getBooks();
@@ -46,17 +58,6 @@ export class BookListComponent implements OnInit {
       }
     );
   }
-
-  // Subscribing "kicks off" the observable stream
-  // ***** The subscribe method takes in an observer. An observer has three methods: ****
-
-  /****
-   1) The method to process each time an item is emitted from the observable. NEXT;
-   2) The method to process any error that occurs. ERROR;
-   3) The method to clean up anything when the observer completes.;
-   () => This last one is seldom used when working with Angular's observables. COMPLETE
-   */
-
   deleteBook(id: number) {
 
     this.bookService.deleteBook(id).subscribe(

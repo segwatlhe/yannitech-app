@@ -39,13 +39,11 @@ export class CreateBookComponent implements OnInit {
       this.bookService.createBook(this.bookForm.value).subscribe(
         () => {
           this.gotoList();
+          this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
         },
         error => {
           this.handleError(error);
           this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
-        },
-        () => {
-          this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
         }
       );
     }
