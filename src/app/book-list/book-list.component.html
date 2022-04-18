@@ -1,28 +1,13 @@
 <body>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h2>Book List<i class="fa fa-quote-left fa-0x fa-pull-left fa-border"></i><i
-      class="fa fa-quote-right fa-0x fa-pull-left fa-border"></i></h2>
+    <h2>Book List<i class="fa fa-book fa-0x fa-pull-left fa-border  " style="font-size:36px;color:rgb(135, 196, 253)"></i>
+<!--      <i-->
+<!--      class="fa fa-quote-right fa-0x fa-pull-left fa-border"></i>-->
+    </h2>
   </div>
   <p hidden>This paragraph is not visible on the page, it is hidden from the HTML.</p>
   <div class="panel-body">
-
-    <!--    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">-->
-    <!--      <div class="input-group">-->
-    <!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
-    <!--               name="title" placeholder="Search for a book..." type="text">-->
-    <!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
-    <!--      </div>-->
-    <!--    </form>-->
-
-    <!--    <form>-->
-    <!--      <div class="input-group">-->
-    <!--        <input [(ngModel)]="book.title" aria-describedby="basic-addon1" autocomplete="off" class="form-control" name="search"-->
-    <!--               name="title" placeholder="Search for a book..." type="text">-->
-    <!--        <button type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>-->
-    <!--      </div>-->
-    <!--    </form>-->
-
     <form [formGroup]="searchForm">
       <div class="input-group">
         <input aria-describedby="basic-addon1"
