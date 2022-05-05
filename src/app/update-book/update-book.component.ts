@@ -34,7 +34,8 @@ export class UpdateBookComponent implements OnInit {
         console.log('Observer got a next value: ' + data), this.book = data;
       },
       error => {
-        console.error('Observer got an error: ' + error), this.notifyService.showError('Book list retrieval unsuccessful', 'Yannitech BookStore');
+        console.error('Observer got an error: ' + error),
+          this.notifyService.showError('Book list retrieval unsuccessful', 'Yannitech BookStore');
       },
       () => {
         console.log('Observer got a complete notification');
