@@ -58,6 +58,7 @@ export class BookListComponent implements OnInit {
       }
     );
   }
+
   deleteBook(id: number) {
 
     this.bookService.deleteBook(id).subscribe(
@@ -95,7 +96,12 @@ export class BookListComponent implements OnInit {
     this.bookService.search(this.searchForm.get('title').value).subscribe(
       data => {
         this.books = data.content;
-        this.notifyService.showInfo('Search completed.', 'Yannitech BookStore');
+        if (this.books.length > 0) {
+          this.notifyService.showInfo('Search completed.', 'Yannitech BookStore');
+        } else {
+          this.notifyService.showWarning('Book not found.', 'Yannitech BookStore');
+          this.getBooks();
+        }
       },
       error => {
         this.handleError(error);
