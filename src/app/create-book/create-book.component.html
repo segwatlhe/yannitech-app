@@ -1,55 +1,79 @@
 <h3>Create Book</h3>
 
 <form [formGroup]="bookForm">
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Category</span>
-      </div>
-      <input autocomplete="off"
-             class="form-control"
-             formControlName="category"
-             id="category"
-             name="category"
-             placeholder="Category"
-             required type="text">
-      <span *ngIf="(bookForm.get('category').touched) &&
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Category</span>
+    </div>
+    <input autocomplete="off"
+           class="form-control"
+           formControlName="category"
+           id="category"
+           name="category"
+           placeholder="Category"
+           required type="text">
+    <span *ngIf="(bookForm.get('category').touched) &&
                 bookForm.get('category').errors?.required"
-            class="text-danger">
+          class="text-danger">
                 Category is required
           </span>
-    </div>
+  </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Title</span>
-      </div>
-      <input autocomplete="off" class="form-control" formControlName="title" id="title" name="title" placeholder="Title"
-             required
-             required type="text">
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Title</span>
     </div>
+    <input autocomplete="off"
+           class="form-control"
+           formControlName="title"
+           id="title"
+           name="title"
+           placeholder="Title"
+           required
+           required
+           type="text">
+    <span *ngIf="(bookForm.get('title').touched) &&
+                bookForm.get('title').errors?.required"
+          class="text-danger">
+                Title is required
+          </span>
+  </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Year</span>
-      </div>
-      <input autocomplete="off"
-             class="form-control"
-             formControlName="year"
-             id="year"
-             name="year"
-             placeholder="Year"
-             required
-             required type="text">
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Year</span>
     </div>
+    <input autocomplete="off"
+           class="form-control"
+           formControlName="year"
+           id="year"
+           name="year"
+           placeholder="Year"
+           required
+           required
+           type="text">
+    <span *ngIf="(bookForm.get('year').touched) &&
+                bookForm.get('year').errors?.required"
+          class="text-danger">
+                Year is required
+          </span>
+  </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Price</span>
-      </div>
-      <input autocomplete="off" class="form-control" formControlName="price" id="price" name="price" placeholder="Price"
-             required="true" required type="number">
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Price</span>
     </div>
+    <input autocomplete="off" class="form-control"
+           formControlName="price" id="price" name="price"
+           placeholder="Price"
+           required="true"
+           required
+           type="number">
+    <span *ngIf="(bookForm.get('price').touched) &&
+                bookForm.get('price').errors?.required"
+          class="text-danger">
+                Price is required
+          </span>
   </div>
   <button (click)="save()" class="btn btn-primary" style="margin-left: 10px" type="submit">Submit</button>
   <button (click)="gotoList()" class="btn btn-warning" style="margin-left: 10px">Back</button>

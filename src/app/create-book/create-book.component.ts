@@ -46,6 +46,8 @@ export class CreateBookComponent implements OnInit {
           this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
         }
       );
+    }else {
+      this.notifyService.showError('Form not valid', 'Yannitech BookStore');
     }
   }
 

@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateAuthorComponent } from './create-author/create-author.component';
 import { BookFindComponent } from './book-find/book-find.component';
-import {NgxPaginationModule} from "ngx-pagination";
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({

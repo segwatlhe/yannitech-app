@@ -21,7 +21,7 @@ export class BookListComponent implements OnInit {
 
   searchForm: FormGroup;
   pageCustomer = 1;
-  countCustomer = 10;
+  countCustomer = 5;
   books: Book[];
 
   // Subscribing "kicks off" the observable stream
