@@ -1,7 +1,8 @@
 <body>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h2>Book List<i class="fa fa-book fa-0x fa-pull-left fa-border  " style="font-size:36px;color:rgb(135, 196, 253)"></i>
+    <h2>Book List<i class="fa fa-book fa-0x fa-pull-left fa-border  "
+                    style="font-size:36px;color:rgb(135, 196, 253)"></i>
     </h2>
   </div>
   <p hidden>This paragraph is not visible on the page, it is hidden from the HTML.</p>
@@ -14,9 +15,10 @@
                formControlName="title"
                name="search"
                name="title" placeholder="Search for a book..." type="text">
-        <button (click)="search()" type="submit"><i class="fa fa-search" style="font-size:48;color:green;"></i></button>
+        <button (click)="search()" type="submit"><i class="fa fa-search" style="font-size:48;color:orange;"></i></button>&nbsp;
+        <button (click)="clear()" type="submit"><i class="fa fa-window-close" style="font-size:48;color:red;"></i></button>&nbsp;
+        <button (click)="refresh()" type="submit"><i class="fa fa-refresh" style="font-size:48;color:mediumseagreen;"></i></button>
       </div>
-      <!--    </form>-->
 
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -37,17 +39,17 @@
           <td>{{book.year}}</td>
           <td>{{book.price}}</td>
           <td>
-            <button (click)="deleteBook(book.id)" class="btn btn-danger" data-placement="top" data-toggle="tooltip"
+            <button (click)="deleteBook(book.id)" class="btn-sm btn-danger" data-placement="top" data-toggle="tooltip"
                     style="margin-left: 10px" title="Delete Book">Remove <i class="fa fa-trash"
                                                                             style="font-size:24px"></i></button>
-            <button (click)="updateBook(book.id)" class="btn btn-warning" data-placement="top" data-toggle="tooltip"
+            <button (click)="updateBook(book.id)" class="btn-sm btn-warning" data-placement="top" data-toggle="tooltip"
                     style="margin-left: 10px" title="Edit Book">Edit <i class="fa fa-pencil" style="font-size:24px"></i>
             </button>
-            <button (click)="bookDetails(book.id)" class="btn btn-info" data-placement="top" data-toggle="tooltip"
+            <button (click)="bookDetails(book.id)" class="btn-sm btn-info" data-placement="top" data-toggle="tooltip"
                     style="margin-left: 10px" title="View Details about Book">Details <i class="fa fa-file-text-o"
                                                                                          style="font-size:24px"></i>
             </button>
-            <button (click)="addAuthor(book.id)" class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+            <button (click)="addAuthor(book.id)" class="btn-sm btn-primary" data-placement="top" data-toggle="tooltip"
                     style="margin-left: 10px" title="Add Book Author/s">Add Author <i class="fa fa-user-plus"
                                                                                       style="font-size:24px"></i>
             </button>

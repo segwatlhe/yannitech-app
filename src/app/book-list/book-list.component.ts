@@ -110,6 +110,14 @@ export class BookListComponent implements OnInit {
     );
   }
 
+  clear() {
+    this.searchForm.setControl('title', new FormControl(''));
+  }
+
+  refresh() {
+    this.ngOnInit();
+  }
+
   // error handling
   handleError(error) {
     let errorMessage = '';
