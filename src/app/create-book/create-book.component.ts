@@ -26,27 +26,30 @@ export class CreateBookComponent implements OnInit {
 
   buildRegistrationFrom() {
     this.bookForm = this.fb.group({
-      category: new FormControl('', Validators.required),
-      title: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.maxLength(4)]),
-      price: new FormControl('', [Validators.required])
+        category: new FormControl('', Validators.required),
+        title: new FormControl('', [Validators.required]),
+        year: new FormControl('', [Validators.maxLength(4)]),
+        price: new FormControl('', [Validators.required])
       }
     );
   }
 
   save() {
     if (this.bookForm.valid) {
-      this.bookService.createBook(this.bookForm.value).subscribe(
-        () => {
+      this.bookService.createBook(this.bookForm.value).subscribe({
+        next: (res) => {
           this.gotoList();
           this.notifyService.showSuccess('Book save successful', 'Yannitech BookStore');
         },
-        error => {
+        error: (error) => {
           this.handleError(error);
           this.notifyService.showError('Book save unsuccessful', 'Yannitech BookStore');
+        },
+        complete: () => {
+          console.log('complete');
         }
-      );
-    }else {
+      });
+    } else {
       this.notifyService.showError('Form not valid', 'Yannitech BookStore');
     }
   }
