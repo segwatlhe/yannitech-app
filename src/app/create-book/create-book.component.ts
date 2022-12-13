@@ -72,6 +72,6 @@ export class CreateBookComponent implements OnInit {
       console.log('server-side error ' + errorMessage);
     }
     console.log(errorMessage);
-    return throwError(errorMessage);
+    return throwError(() => errorMessage);
   }
 }
