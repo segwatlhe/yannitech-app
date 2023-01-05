@@ -22,6 +22,22 @@ export class CreateBookComponent implements OnInit {
 
   ngOnInit() {
     this.buildRegistrationFrom();
+
+    let promise = new Promise((resolve, reject) => {
+      resolve("Promise Resolved");
+    });
+
+    let promise2 = new Promise((resolve, reject) => {
+      resolve("Promise Resolved");
+    }).then((sucess) => {
+      console.log(sucess);
+    }).catch(function (error) {
+      console.log(error);
+    }).finally(() => {
+      console.log('finally');
+    });
+
+
   }
 
   buildRegistrationFrom() {
