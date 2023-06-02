@@ -65,6 +65,11 @@
           </div>
         </div>
       </div>
+      <div *ngIf="isLoaded" style="text-align: center;">
+        <button (click)="prevPage()" [disabled]="page === 1">Prev</button>
+        <span>{{ page }} / {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+      </div>
     </form>
   </div>
 </div>

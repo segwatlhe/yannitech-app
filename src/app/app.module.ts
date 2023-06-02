@@ -15,6 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CreateAuthorComponent } from './create-author/create-author.component';
 import { BookFindComponent } from './book-find/book-find.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {PdfViewerModule} from "ng2-pdf-viewer";
 
 
 @NgModule({
@@ -27,16 +28,16 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CreateAuthorComponent,
     BookFindComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    ReactiveFormsModule,
-    NgxPaginationModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        ReactiveFormsModule,
+        NgxPaginationModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
